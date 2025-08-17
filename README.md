@@ -1,77 +1,77 @@
-# 🛒 Walmart Sales Prediction  
+# 🛒 Prédiction des ventes Walmart  
 
-## 📇 Company Description  
-**Walmart Inc.** is an American multinational retail corporation that operates a chain of hypermarkets, discount department stores, and grocery stores from the United States, headquartered in Bentonville, Arkansas.  
-The company was founded by **Sam Walton** in **1962**.  
-
----
-
-## 🚧 Project  
-Walmart’s marketing team asked for the development of a **machine learning model** capable of predicting **weekly sales** across its stores.  
-The goal is to better understand how sales are influenced by **economic indicators** (fuel price, unemployment, CPI, holidays, etc.), and to use the model for **forecasting and planning marketing campaigns**.  
+## 📇 Description de l’entreprise  
+**Walmart Inc.** est une entreprise multinationale américaine qui exploite une chaîne d’hypermarchés, de magasins de détail à bas prix et de supermarchés, dont le siège est situé à Bentonville, Arkansas.  
+La société a été fondée par **Sam Walton** en **1962**.  
 
 ---
 
-## 🎯 Goals  
-The project is divided into three main steps:  
-1. **Exploratory Data Analysis (EDA)** and preprocessing  
-2. **Baseline model**: Linear Regression  
-3. **Regularized models**: Ridge & Lasso to avoid overfitting  
+## 🚧 Projet  
+L’équipe marketing de Walmart a demandé le développement d’un **modèle de machine learning** capable de prédire les **ventes hebdomadaires** dans ses magasins.  
+L’objectif est de mieux comprendre l’influence des **indicateurs économiques** (prix du carburant, chômage, CPI, jours fériés, etc.) sur les ventes, et d’utiliser ce modèle pour **anticiper et planifier les campagnes marketing**.  
 
 ---
 
-## 🖼️ Scope of the Project  
-- Dataset: weekly sales data from Walmart (adapted from Kaggle, custom version from **JULIE**).  
-- Target variable: `Weekly_Sales`.  
-- Features: store information, holiday flag, fuel price, CPI, unemployment rate, and date-derived variables (year, month, day_of_month, etc.).  
+## 🎯 Objectifs  
+Le projet est divisé en trois grandes étapes :  
+1. **Analyse exploratoire des données (EDA)** et prétraitement  
+2. **Modèle de base** : régression linéaire  
+3. **Modèles régularisés** : Ridge & Lasso pour éviter le surapprentissage  
 
 ---
 
-## 📊 Methodology  
+## 🖼️ Périmètre du projet  
+- Jeu de données : ventes hebdomadaires de Walmart (issu de Kaggle, version adaptée sur **JULIE**).  
+- Variable cible : `Weekly_Sales`.  
+- Variables explicatives : informations sur les magasins, indicateur de jours fériés, prix du carburant, CPI, taux de chômage, ainsi que des variables dérivées de la date (année, mois, jour, jour de la semaine).  
 
-### 1. Data Preprocessing & EDA  
-- Dropped rows with missing target values (`Weekly_Sales`).  
-- Handled outliers using the **3σ rule** for variable `Unemployment`.  
-- Extracted new features from the `Date` column:  
+---
+
+## 📊 Méthodologie  
+
+### 1. Prétraitement des données & EDA  
+- Suppression des lignes avec valeurs manquantes dans la cible (`Weekly_Sales`).  
+- Gestion des valeurs aberrantes avec la règle des **3σ** sur la variable numérique `Unemployment`.  
+- Extraction de nouvelles variables à partir de `Date` :  
   - `year`, `month`, `day_of_month`, `day_of_week`  
-- Checked multicollinearity with a **correlation heatmap** and removed redundant variables.    
+- Analyse de la multicolinéarité avec une **matrice de corrélation** et suppression de variables redondantes.    
 
-### 2. Baseline Model: Linear Regression  
-- Trained a **linear regression** model as a benchmark.  
-- Achieved good performance but some risk of **overfitting** observed.  
+### 2. Modèle de base : Régression linéaire  
+- Entraînement d’un premier modèle de **régression linéaire** comme benchmark.  
+- Résultats satisfaisants mais présence de **risque de surapprentissage**.  
 
-### 3. Regularized Models: Ridge & Lasso  
-- Trained **Ridge** and **Lasso** regression models to reduce overfitting.  
-- Used **GridSearchCV** for hyperparameter tuning (`alpha`).  
-- Applied **KFold cross-validation (7 folds)** to assess generalization.  
-
----
-
-## 📈 Results  
-
-| Model       | Train R² | Test R² | CV Mean | CV Std |
-|-------------|----------|---------|---------|--------|
-| Linear      | ~0.997   | ~0.944  | ~0.857  | 0.11   |
-| Ridge       | ~0.996   | ~0.945  | ~0.876  | 0.09   |
-| **Lasso**   | ~0.994   | **0.960** | **0.883**  | 0.11   |
-
-➡️ **Lasso regression** provided the **best generalization** with the highest test R² and good stability.  
-➡️ Coefficient analysis highlighted the most **relevant predictors** for sales.  
+### 3. Modèles régularisés : Ridge & Lasso  
+- Entraînement des modèles **Ridge** et **Lasso** afin de limiter l’overfitting.  
+- Optimisation des hyperparamètres (`alpha`) via **GridSearchCV**.  
+- Évaluation avec **validation croisée KFold (7 folds)** pour mesurer la généralisation.  
 
 ---
 
-## ✅ Conclusion    
-- **Lasso regression** was selected as the final model:  
-  - Best predictive performance  
-  - Feature selection capability (sparsity in coefficients)  
-- This model can help Walmart:  
-  - Anticipate sales more accurately  
-  - Identify key drivers influencing sales  
-  - Support data-driven marketing and inventory strategies  
+## 📈 Résultats  
+
+| Modèle      | R² Train | R² Test | Moy. CV | Écart-type CV |
+|-------------|----------|---------|---------|---------------|
+| Linéaire    | ~0.997   | ~0.944  | ~0.857  | 0.11          |
+| Ridge       | ~0.996   | ~0.945  | ~0.876  | 0.09          |
+| **Lasso**   | ~0.994   | **0.960** | **0.883** | 0.11       |
+
+➡️ **La régression Lasso** a montré la **meilleure généralisation** avec le R² test le plus élevé et une bonne stabilité.  
+➡️ L’analyse des coefficients a permis d’identifier les **variables les plus déterminantes** dans les ventes.  
 
 ---
 
-## 🛠️ Tech Stack  
+## ✅ Conclusion  .  
+- Le modèle final retenu est la **régression Lasso** :  
+  - Excellente performance prédictive  
+  - Capacité de sélection de variables (coefficients nuls pour les moins pertinentes)  
+- Ce modèle permet à Walmart de :  
+  - Prédire plus précisément ses ventes  
+  - Identifier les principaux facteurs influents  
+  - Orienter ses décisions marketing et logistiques  
+
+---
+
+## 🛠️ Stack technique  
 - **Python**  
 - **pandas**, **numpy**  
 - **matplotlib**, **seaborn**  
@@ -80,10 +80,10 @@ The project is divided into three main steps:
 
 ---
 
-## 📬 Deliverables  
-- Exploratory Data Analysis (EDA)  
-- Preprocessing pipeline  
-- Baseline linear regression model  
-- Regularized regression models (Ridge, Lasso)  
-- Performance evaluation (R², MAE, RMSE, CV)  
-- Final recommendation: **Lasso regression**  
+## 📬 Livrables  
+- Analyse exploratoire (EDA)  
+- Pipeline de prétraitement  
+- Modèle de régression linéaire (baseline)  
+- Modèles régularisés (Ridge, Lasso)  
+- Évaluation des performances (R², MAE, RMSE, CV)  
+- Recommandation finale : **régression Lasso**  
