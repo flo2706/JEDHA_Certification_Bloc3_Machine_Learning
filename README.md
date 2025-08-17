@@ -23,7 +23,7 @@ The project is divided into three main steps:
 ## 🖼️ Scope of the Project  
 - Dataset: weekly sales data from Walmart (adapted from Kaggle, custom version from **JULIE**).  
 - Target variable: `Weekly_Sales`.  
-- Features: store information, holiday flag, fuel price, CPI, unemployment rate, and date-derived variables (year, month, day, etc.).  
+- Features: store information, holiday flag, fuel price, CPI, unemployment rate, and date-derived variables (year, month, day_of_month, etc.).  
 
 ---
 
@@ -31,11 +31,10 @@ The project is divided into three main steps:
 
 ### 1. Data Preprocessing & EDA  
 - Dropped rows with missing target values (`Weekly_Sales`).  
-- Handled outliers using the **3σ rule** for numerical variables (`Temperature`, `Fuel_Price`, `CPI`, `Unemployment`).  
+- Handled outliers using the **3σ rule** for variable `Unemployment`.  
 - Extracted new features from the `Date` column:  
-  - `year`, `month`, `day`, `day_of_week`  
-- Checked multicollinearity with a **correlation heatmap** and removed redundant variables.  
-- Encoded categorical variables (cyclical encoding for dates, one-hot for flags).  
+  - `year`, `month`, `day_of_month`, `day_of_week`  
+- Checked multicollinearity with a **correlation heatmap** and removed redundant variables.    
 
 ### 2. Baseline Model: Linear Regression  
 - Trained a **linear regression** model as a benchmark.  
@@ -61,8 +60,7 @@ The project is divided into three main steps:
 
 ---
 
-## ✅ Conclusion  
-- **EDA insights** confirmed that variables such as **CPI and Fuel Price** strongly influence sales.  
+## ✅ Conclusion    
 - **Lasso regression** was selected as the final model:  
   - Best predictive performance  
   - Feature selection capability (sparsity in coefficients)  
